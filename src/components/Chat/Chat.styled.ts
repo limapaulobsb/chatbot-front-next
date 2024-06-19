@@ -6,42 +6,30 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-bottom: 40px;
+  padding-bottom: 50px;
   width: 100%;
+
+  @media screen and (width <= 500px) {
+    padding-bottom: 25px;
+  }
 `;
 
 export const Conversation = styled.div<{ $open: boolean }>`
   display: flex;
   flex-direction: column;
   flex-grow: 10;
-  gap: 40px;
+  gap: 60px;
   overflow-y: scroll;
-  padding: 30px 24px 0 40px;
+  padding: 40px 30px 0;
 
   & > div:first-of-type {
-    align-items: center;
     display: flex;
-    position: relative;
+    gap: 10px;
 
     & > img {
-      left: -20px;
       opacity: 0.9;
       position: relative;
-      top: 30px;
-      z-index: 10;
-    }
-
-    &::after {
-      background-color: black;
-      border-radius: 50%;
-      bottom: -35px;
-      content: '';
-      filter: blur(3px);
-      height: 15px;
-      left: 0;
-      opacity: 0.4;
-      position: absolute;
-      width: 56px;
+      top: 20px;
     }
   }
 
@@ -86,4 +74,9 @@ export const SendButton = styled(IconButton)`
   height: 60px;
   position: absolute;
   right: -30px;
+
+  @media screen and (width <= 500px) {
+    bottom: 30px;
+    right: 10px;
+  }
 `;
