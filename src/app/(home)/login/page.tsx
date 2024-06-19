@@ -40,9 +40,9 @@ function Login() {
         <LoginForm />
         <MainButton onClick={() => router.push('/registro')}>Registro</MainButton>
         <hr />
-        <SocialButton onClick={() => signInWithGoogle(path)}>
+        <SocialButton onClick={() => signInWithGoogle(path)} disabled={true}>
           <Image src={'/logoGoogle.png'} width={30} height={30} alt="Logo Google" />
-          <span>Continuar com Google</span>
+          <span><s>Continuar com Google</s></span>
         </SocialButton>
       </Container>
     </>
