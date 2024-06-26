@@ -9,7 +9,7 @@ const api = {
   async fetchStream({
     body,
   }: FetchStreamPayload): Promise<APIResult<ReadableStreamDefaultReader>> {
-    const response = await fetch(`/api/ai/retrieval`, {
+    const response = await fetch('https://bayarea-chatbot.vercel.app/api/ai/retrieval', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ messages: body.messages }),
@@ -22,7 +22,7 @@ const api = {
   },
 
   async sendEmail({ body }: SendEmailPayload): Promise<APIResult<SendEmailResponse>> {
-    const response = await fetch(`/api/send`, {
+    const response = await fetch('https://bayarea-chatbot.vercel.app/api/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
