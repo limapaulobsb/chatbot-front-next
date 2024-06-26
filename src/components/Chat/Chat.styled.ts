@@ -1,17 +1,12 @@
 import styled from 'styled-components';
 
-import { IconButton } from '@/components/styled';
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 70px;
+  position: relative;
   width: 100%;
-
-  @media screen and (width <= 500px) {
-    padding-bottom: 25px;
-  }
 `;
 
 export const Conversation = styled.div<{ $open: boolean }>`
@@ -20,7 +15,7 @@ export const Conversation = styled.div<{ $open: boolean }>`
   flex-grow: 10;
   gap: 60px;
   overflow-y: scroll;
-  padding: 40px 30px 0;
+  padding: 60px 30px 0;
 
   & > div:first-of-type {
     display: flex;
@@ -34,8 +29,8 @@ export const Conversation = styled.div<{ $open: boolean }>`
   }
 
   & > .redirect-status {
-    font-size: 0.8rem;
-    margin: 40px 40px 0;
+    font-size: 0.9rem;
+    margin: 40px 20px 0;
     text-align: center;
 
     & > p {
@@ -44,7 +39,6 @@ export const Conversation = styled.div<{ $open: boolean }>`
     }
 
     & > span {
-      font-size: 0.9rem;
       font-weight: bold;
     }
   }
@@ -58,7 +52,7 @@ export const Conversation = styled.div<{ $open: boolean }>`
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--clr-c);
+    background-color: var(--clr-a);
   }
 `;
 
@@ -66,17 +60,4 @@ export const Loading = styled.div`
   align-items: center;
   display: flex;
   min-height: 40px;
-`;
-
-export const SendButton = styled(IconButton)`
-  background-color: var(--clr-d);
-  bottom: 20px;
-  height: 60px;
-  position: absolute;
-  right: -30px;
-
-  @media screen and (width <= 500px) {
-    bottom: 30px;
-    right: 10px;
-  }
 `;
