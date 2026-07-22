@@ -1,12 +1,25 @@
-import { type NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
 
 import { fetchUserProfile } from '@/actions/auth';
-import { fetchSupportById } from './actions/support';
+import { fetchConversationBySupportId } from '@/actions/conversations';
 import { updateSession } from '@/utils/supabase/middleware';
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const user = await fetchUserProfile();
+
+  if (pathname === '/') {
+    if (user) {
+      return NextResponse.rewrite(new URL(`/novo/${uuidv4()}`, request.url));
+    }
+  }
+
+  if (pathname.startsWith('/chat') || pathname.startsWith('/novo')) {
+    if (!user) {
+      return NextResponse.rewrite(new URL('/login', request.url));
+    }
+  }
 
   if (pathname.startsWith('/suporte/atendimentos')) {
     if (!user) {
@@ -14,7 +27,7 @@ export async function middleware(request: NextRequest) {
     }
 
     if (user.role === 'user') {
-      return NextResponse.rewrite(new URL('/404', request.url));
+      return NextResponse.rewrite(new URL('/401', request.url));
     }
   }
 
@@ -23,11 +36,11 @@ export async function middleware(request: NextRequest) {
       return NextResponse.rewrite(new URL('/login', request.url));
     }
 
-    const pathId = pathname.split('/').splice(-1)[0];
-    const support = await fetchSupportById(pathId);
+    const slugs = pathname.split('/').filter(Boolean);
+    const conversation = await fetchConversationBySupportId(slugs[2]);
 
-    if (user.id !== support?.owner_profile.id) {
-      return NextResponse.rewrite(new URL('/404', request.url));
+    if (user.id !== conversation?.owner_id) {
+      return NextResponse.rewrite(new URL('/401', request.url));
     }
   }
 

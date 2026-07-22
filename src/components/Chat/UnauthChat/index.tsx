@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 import { Container, Conversation } from '../Chat.styled';
@@ -9,7 +11,7 @@ import { MessageButton } from '@/components/styled';
 function UnauthChat() {
   return (
     <Container>
-      <Conversation $open={true}>
+      <Conversation>
         <div>
           <Image
             src="/eda.png"
